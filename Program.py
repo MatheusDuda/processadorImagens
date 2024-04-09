@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, simpledialog, Toplevel
+from tkinter import filedialog, simpledialog, messagebox, Toplevel
 import cv2
 import numpy as np
 from PIL import Image, ImageTk
@@ -10,7 +10,7 @@ class VisualizadorDeImagemInterativo:
         self.root = tk.Tk()
         self.root.title("Paint 2.0")
 
-        self.canvas = tk.Canvas(self.root, bg="#f0f0f0")
+        self.canvas = tk.Canvas(self.root, bg="#7f7f7f")
         self.canvas.pack(fill=tk.BOTH, expand=True)
 
         # Cria o menu
@@ -145,9 +145,11 @@ class VisualizadorDeImagemInterativo:
                 self.status.config(text="Imagem salva como: " + caminho_salvar)
 
     def criar_matriz(self):
-        if self.imagem_original:
-            matriz = np.array(self.imagem_original)
-            self.mostrar_matriz(matriz)
+        resposta = messagebox.askyesno("Confirmação", "Tem certeza que deseja gerar a matriz?")
+        if resposta:
+            if self.imagem_original:
+                matriz = np.array(self.imagem_original)
+                self.mostrar_matriz(matriz)
 
     def mostrar_matriz(self, matriz):
         nova_janela = Toplevel(self.root)
