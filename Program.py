@@ -8,9 +8,9 @@ import math
 class VisualizadorDeImagemInterativo:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("Visualizador de Imagem Interativo")
+        self.root.title("Paint 2.0")
 
-        self.canvas = tk.Canvas(self.root, bg="white")
+        self.canvas = tk.Canvas(self.root, bg="#f0f0f0")
         self.canvas.pack(fill=tk.BOTH, expand=True)
 
         # Cria o menu
@@ -22,7 +22,6 @@ class VisualizadorDeImagemInterativo:
         self.menu.add_cascade(label="Arquivo", menu=self.submenu_arquivo)
         self.submenu_arquivo.add_command(label="Abrir Imagem", command=self.abrir_imagem)
         self.submenu_arquivo.add_command(label="Salvar Imagem", command=self.salvar_imagem)
-        self.submenu_arquivo.add_command(label="Criar Matriz", command=self.criar_matriz)
 
         # Cria o submenu "Editar"
         self.submenu_editar = tk.Menu(self.menu)
@@ -35,6 +34,10 @@ class VisualizadorDeImagemInterativo:
         self.submenu_editar.add_command(label="Definir Escala", command=self.definir_escala)
         self.submenu_editar.add_command(label="Deslocar Para Direita", command=self.deslocar_direita)
         self.submenu_editar.add_command(label="Deslocar Para Esquerda", command=self.deslocar_esquerda)
+
+        # Cria o submenu "Matriz"
+        self.submenu_matriz = tk.Menu(self.menu)
+        self.menu.add_command(label="Gerar Matriz", command=self.criar_matriz)
 
         # Adiciona uma barra de status
         self.status = tk.Label(self.root, text="Pronto", bd=1, relief=tk.SUNKEN, anchor=tk.W)
